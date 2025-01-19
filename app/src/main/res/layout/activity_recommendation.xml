@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.recommendation.RecommendationActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/Accent_Dark_Gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="TODAY HEALTH"
+            android:textAlignment="center"
+            android:textColor="@color/Primary_Dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_bloodsugar_level1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Blood Sugar Level :"
+            android:textColor="@color/Primary_Dark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.375"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <TextView
+            android:id="@+id/tv_bloodsugar_level2"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Accent_Light_Red"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_bloodsugar_level1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintStart_toEndOf="@id/tv_bloodsugar_level1"
+            app:layout_constraintTop_toTopOf="@+id/tv_bloodsugar_level1"
+            tools:text="100 mg/dL" />
+
+
+        <TextView
+            android:id="@+id/tv_bloodsugar_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="8sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_bloodsugar_level2"
+            app:layout_constraintStart_toStartOf="@+id/tv_bloodsugar_level1"
+            app:layout_constraintTop_toBottomOf="@id/tv_bloodsugar_level1"
+            tools:text="Your blood sugar level is within the normal range. Maintain a balanced diet and regular exercise." />
+
+        <TextView
+            android:id="@+id/tv_bloodpressure_level1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Blood Pressure Level :"
+            android:textColor="@color/Primary_Dark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.408"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_bloodsugar_desc" />
+
+        <TextView
+            android:id="@+id/tv_bloodpressure_level2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/Accent_Light_Red"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_bloodpressure_level1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.018"
+            app:layout_constraintStart_toEndOf="@id/tv_bloodpressure_level1"
+            app:layout_constraintTop_toBottomOf="@id/tv_bloodsugar_desc"
+            tools:text="119/70 mm Hg" />
+
+        <TextView
+            android:id="@+id/tv_bloodpressure_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="8sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_bloodpressure_level2"
+            app:layout_constraintStart_toStartOf="@+id/tv_bloodpressure_level1"
+            app:layout_constraintTop_toBottomOf="@id/tv_bloodpressure_level1"
+            tools:text="Your blood sugar level is within the normal range. Maintain a balanced diet and regular exercise." />
+
+        <TextView
+            android:id="@+id/tv_BMI_level1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="BMI(Body Mass Index) :"
+            android:textColor="@color/Primary_Dark"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.426"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_bloodpressure_desc" />
+
+        <TextView
+            android:id="@+id/tv_BMI_level2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="9"
+            android:textColor="@color/Accent_Light_Red"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_BMI_level1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintStart_toEndOf="@id/tv_BMI_level1"
+            app:layout_constraintTop_toTopOf="@+id/tv_BMI_level1"
+            tools:text="22.03 BMI" />
+
+        <TextView
+            android:id="@+id/tv_BMI_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="8sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_BMI_level2"
+            app:layout_constraintStart_toStartOf="@+id/tv_BMI_level1"
+            app:layout_constraintTop_toBottomOf="@id/tv_BMI_level1"
+            tools:text="This is still considered an acceptable range, and is associated with good health." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_title_recommendation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="TODAY RECOMMENDATION"
+        android:textAlignment="center"
+        android:textColor="@color/Primary_Dark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:itemCount="4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/item_goals_recommendation"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_recommendation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

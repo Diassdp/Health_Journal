@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Health Journal</string>
+
+
+    // Validation
+    <string name="email_validation">Masukkan alamat email yang valid!</string>
+    <string name="password_length">Kolom ini tidak boleh kurang dari 8 karakter!</string>
+    <string name="empty_field">Kolom ini tidak boleh kosong!</string>
+    <string name="required_field">This field is required!</string>
+</resources>

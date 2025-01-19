@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dashboard.MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_Health_Report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="@color/Accent_Dark_Gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_Daily_Report_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="HEALTH REPORT"
+            android:textAlignment="center"
+            android:textColor="@color/Primary_Dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Instruksi Pengukuran Data Yang Optimal"
+            android:textAlignment="center"
+            android:textColor="@color/Primary_Dark"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <ImageView
+            android:id="@+id/iv_instruction_1"
+            android:layout_width="203dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/frame_1"
+            app:layout_constraintTop_toBottomOf="@id/tv_sub_title" />
+
+        <ImageView
+            android:id="@+id/iv_instruction_2"
+            android:layout_width="203dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/frame_2"
+            app:layout_constraintTop_toBottomOf="@id/iv_instruction_1"/>
+
+        <ImageView
+            android:id="@+id/iv_instruction_3"
+            android:layout_width="203dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/frame_3"
+            app:layout_constraintTop_toBottomOf="@id/iv_instruction_2"/>
+
+            <ImageView
+            android:id="@+id/iv_instruction_4"
+            android:layout_width="203dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/frame_4"
+            app:layout_constraintTop_toBottomOf="@id/iv_instruction_3"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_Daily_Report_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_title_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="TODAY HEALTH REPORT"
+            android:textAlignment="center"
+            android:textColor="@color/Primary_Dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sub_title_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Hasil Data Yang Diambil Hari Ini"
+            android:textAlignment="center"
+            android:textColor="@color/Primary_Light"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_2" />
+
+            <TextView
+                android:id="@+id/tv_sub_title_BSL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:text="Blood Sugar Level : "
+                android:textColor="@color/Primary_Light"
+                app:layout_constraintStart_toStartOf="@+id/tv_sub_title_2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sub_title_2" />
+
+            <TextView
+                android:id="@+id/tv_bloodsugar_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="100 mg/dL"
+                android:textColor="@color/Accent_Light_Red"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sub_title_BSL"
+                app:layout_constraintStart_toEndOf="@+id/tv_sub_title_BSL"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sub_title_2" />
+
+            <TextView
+                android:id="@+id/tv_bloodsugar_desc"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:text="Your blood sugar level is within the normal range. Maintain a balanced diet and regular exercise."
+                android:textSize="8sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_bloodsugar_level"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_sub_title_BSL"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sub_title_BSL" />
+
+            <TextView
+                android:id="@+id/tv_sub_title_BPL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Primary_Light"
+                android:layout_marginTop="10dp"
+                android:text="Blood Pressure Level : "
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/tv_sub_title_2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_bloodsugar_desc" />
+
+            <TextView
+                android:id="@+id/tv_bloodpressure_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="119/70 mm Hg"
+                android:textSize="12sp"
+                android:textStyle="bold"                android:textColor="@color/Accent_Light_Red"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sub_title_BPL"
+                app:layout_constraintStart_toEndOf="@+id/tv_sub_title_BPL"
+                app:layout_constraintTop_toTopOf="@+id/tv_sub_title_BPL"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/tv_bloodpressure_desc"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:text="Your blood pressure is within the normal range. Continue a heart-healthy lifestyle."
+                android:textSize="8sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_sub_title_BPL"
+                app:layout_constraintTop_toBottomOf="@id/tv_sub_title_BPL" />
+
+            <TextView
+                android:id="@+id/tv_sub_title_BMI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/Primary_Light"
+                android:text="BMI(Body Mass Index) : "
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/tv_sub_title_2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_sub_title_2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_bloodpressure_desc" />
+
+            <TextView
+                android:id="@+id/tv_bmi_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22.03 BMI"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/Accent_Light_Red"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_sub_title_BMI"
+                app:layout_constraintTop_toTopOf="@+id/tv_sub_title_BMI"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sub_title_BMI"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tv_bmi_desc"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:text="This is still considered an acceptable range, and is associated with good health."
+                android:textSize="8sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_sub_title_BMI"
+                app:layout_constraintTop_toBottomOf="@id/tv_sub_title_BMI" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/materialDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.700" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fl_daily_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="5dp"
+            android:background="@drawable/daily_counter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialDivider">
+
+            <ImageView
+                android:id="@+id/iv_cuboid_indicator_1_orange"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/cuboid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_title_dailycounter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_cuboid_indicator_1_green"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/cuboid_green"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_title_dailycounter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_title_dailycounter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pemeriksaan Minggu ini"
+                android:textColor="@color/Primary_Dark"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_daily_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 / 7"
+                android:textColor="@color/Accent_Light_Red"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_dailycounter" />
+
+            <ImageView
+                android:id="@+id/iv_cuboid_indicator_2_orange"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/cuboid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_title_dailycounter"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_cuboid_indicator_2_green"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/cuboid_green"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_title_dailycounter"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_input_data"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_button"
+            android:text="Masukan Data Sekarang"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:backgroundTint="@color/Accent_Light_Orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fl_daily_counter"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_recomendation"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_button"
+            android:visibility="gone"
+            android:text="Rekomendasi Sekarang"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:backgroundTint="@color/Primary_Light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fl_daily_counter"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_health_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/item_health_history"
+        app:layout_constraintTop_toBottomOf="@+id/cl_Health_Report" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/Primary_Light"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
