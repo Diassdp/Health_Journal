@@ -1,5 +1,6 @@
 package com.healthjournal.data
 
+import com.google.android.gms.tasks.Task
 import java.io.Serializable
 
 
@@ -18,6 +19,7 @@ data class ResultData(
     val diastolicBP: Int,
     val systolicBP: Int,
     val BMI: Float,
-    val date: String
+    val date: String,
+    val task: List<Map<String, Any>>
     ) : Serializable
 

@@ -88,10 +88,10 @@
             app:layout_constraintTop_toBottomOf="@id/iv_user" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_input_blood_pressure_SYS"
+            android:id="@+id/cl_input_weight"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:padding="10dp"
+            android:padding="5dp"
             android:background="@drawable/bg_input"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Berat\nBadan"
+                android:text="Berat Badan \n(KG)"
                 android:textAlignment="center"
                 android:textColor="@color/Primary_Dark"
                 android:textSize="12sp"
@@ -115,35 +115,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tl_input_weight"
-                android:layout_width="60dp"
-                android:layout_height="40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_input_weight">
-
                 <EditText
                     android:id="@+id/edt_input_weight"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:textColor="@color/black" />
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/bg_input_box"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_input_weight"
+                    android:inputType="number"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_input_blood_pressure_DIA"
+            android:id="@+id/cl_input_height"
             android:layout_width="100dp"
-            android:padding="10dp"
+            android:padding="5dp"
             android:layout_height="100dp"
             android:background="@drawable/bg_input"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.687"
-            app:layout_constraintStart_toEndOf="@+id/cl_input_blood_pressure_SYS"
+            app:layout_constraintStart_toEndOf="@+id/cl_input_weight"
             app:layout_constraintTop_toBottomOf="@+id/tv_email"
             app:layout_constraintVertical_bias="0.021">
 
@@ -152,7 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Tinggi\nBadan"
+                android:text="Tinggi Badan\n(CM)"
                 android:textAlignment="center"
                 android:textColor="@color/Primary_Dark"
                 android:textSize="12sp"
@@ -161,24 +157,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tl_input_heigh"
-                android:layout_width="60dp"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_input_height">
-
                 <EditText
                     android:id="@+id/edt_input_heigh"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:textColor="@color/black" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/bg_input_box"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_input_height"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:id="@+id/tv_name"
@@ -192,7 +181,7 @@
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_input_blood_pressure_DIA" />
+            app:layout_constraintTop_toBottomOf="@id/cl_input_height" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tl_name"
@@ -210,6 +199,7 @@
                 android:background="@color/white"
                 android:textColor="@color/black"
                 android:ems="10"
+                android:hint="Masukan Nama Panjang"
                 tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
@@ -257,6 +247,7 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tl_gender" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tl_date_of_birth"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

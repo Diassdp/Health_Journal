@@ -49,10 +49,11 @@
             android:id="@+id/tv_bloodsugar_level2"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/Accent_Light_Red"
-            android:textStyle="bold"
             android:layout_marginTop="10dp"
-
+            android:textColor="@color/Accent_Light_Red"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_bloodsugar_level1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toEndOf="@id/tv_bloodsugar_level1"
@@ -64,7 +65,7 @@
             android:id="@+id/tv_bloodsugar_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="8sp"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_bloodsugar_level2"
             app:layout_constraintStart_toStartOf="@+id/tv_bloodsugar_level1"
             app:layout_constraintTop_toBottomOf="@id/tv_bloodsugar_level1"
@@ -88,9 +89,11 @@
             android:id="@+id/tv_bloodpressure_level2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/Accent_Light_Red"
-            android:textStyle="bold"
             android:layout_marginTop="10dp"
+            android:textColor="@color/Accent_Light_Red"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_bloodpressure_level1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toEndOf="@id/tv_bloodpressure_level1"
@@ -102,7 +105,7 @@
             android:id="@+id/tv_bloodpressure_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="8sp"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_bloodpressure_level2"
             app:layout_constraintStart_toStartOf="@+id/tv_bloodpressure_level1"
             app:layout_constraintTop_toBottomOf="@id/tv_bloodpressure_level1"
@@ -126,9 +129,12 @@
             android:id="@+id/tv_BMI_level2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/Accent_Light_Red"
-            android:textStyle="bold"
             android:layout_marginTop="10dp"
+            android:textColor="@color/Accent_Light_Red"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:maxLength="9"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_BMI_level1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toEndOf="@id/tv_BMI_level1"
@@ -140,7 +146,7 @@
             android:id="@+id/tv_BMI_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="8sp"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="@+id/tv_BMI_level2"
             app:layout_constraintStart_toStartOf="@+id/tv_BMI_level1"
             app:layout_constraintTop_toBottomOf="@id/tv_BMI_level1"
@@ -150,14 +156,14 @@
             android:id="@+id/tv_goals1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recommend Goals Completed :"
+            android:layout_marginTop="8dp"
+            android:text="Goals Completed :"
             android:textColor="@color/Primary_Dark"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.554"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_BMI_level1"
             app:layout_constraintTop_toBottomOf="@id/tv_BMI_desc" />
 
         <TextView
@@ -166,11 +172,13 @@
             android:layout_height="wrap_content"
             android:textColor="@color/Accent_Light_Red"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="2dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_goals1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@id/tv_goals1"
-            app:layout_constraintTop_toBottomOf="@id/tv_BMI_desc"
+            app:layout_constraintTop_toTopOf="@+id/tv_goals1"
             tools:text="3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -178,7 +186,7 @@
         android:id="@+id/tv_title_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="5dp"
         android:text="JOURNAL NOTES"
         android:textAlignment="center"
         android:textColor="@color/Primary_Dark"
@@ -189,26 +197,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_journal_note"
+    <TextView
+        android:id="@+id/tv_journal_note"
         android:layout_width="320dp"
         android:layout_height="325dp"
+        android:background="@drawable/bg_form"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:padding="5dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_note"
-        android:background="@drawable/bg_form">
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula quam et diam consequat, et vestibulum odio consequat. Curabitur sit amet ex auctor ex pharetra placerat a lacinia sapien. In semper nisl eu elit elementum ultrices. Ut hendrerit urna lacinia efficitur euismod. In hac habitasse platea dictumst. Phasellus id tellus sed justo scelerisque vestibulum sit amet commodo tellus. Proin commodo magna purus, non ullamcorper mi blandit sed. Curabitur scelerisque eros nisi, vitae bibendum quam malesuada et. Suspendisse potenti. Vestibulum eu dui a odio posuere laoreet sed ut lectus. Vivamus ultrices sem sit amet enim dictum rhoncus. Nullam pharetra, purus sed bibendum volutpat, diam nibh blandit nunc, ut gravida velit sem eget eros. Maecenas in arcu accumsan, maximus enim id, ullamcorper metus. Morbi blandit nisi non justo hendrerit, in semper velit feugiat. Vestibulum vestibulum nisl sit amet facilisis ullamcorper." />
 
-        <TextView
-            android:id="@+id/tv_journal_note"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula quam et diam consequat, et vestibulum odio consequat. Curabitur sit amet ex auctor ex pharetra placerat a lacinia sapien. In semper nisl eu elit elementum ultrices. Ut hendrerit urna lacinia efficitur euismod. In hac habitasse platea dictumst. Phasellus id tellus sed justo scelerisque vestibulum sit amet commodo tellus. Proin commodo magna purus, non ullamcorper mi blandit sed. Curabitur scelerisque eros nisi, vitae bibendum quam malesuada et. Suspendisse potenti. Vestibulum eu dui a odio posuere laoreet sed ut lectus. Vivamus ultrices sem sit amet enim dictum rhoncus. Nullam pharetra, purus sed bibendum volutpat, diam nibh blandit nunc, ut gravida velit sem eget eros. Maecenas in arcu accumsan, maximus enim id, ullamcorper metus. Morbi blandit nisi non justo hendrerit, in semper velit feugiat. Vestibulum vestibulum nisl sit amet facilisis ullamcorper."
-            android:textSize="10sp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_delete_history"
         android:layout_width="320dp"
@@ -224,6 +225,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_journal_note" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_journal_note" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

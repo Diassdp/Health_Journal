@@ -1,5 +1,8 @@
 package com.healthjournal.ui.dashboard
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -14,45 +18,97 @@ import com.google.firebase.database.database
 import com.healthjournal.R
 import com.healthjournal.data.ResultData
 import com.healthjournal.databinding.ActivityMainBinding
+import com.healthjournal.receiver.ReminderReceiver
 import com.healthjournal.ui.journal.input.JournalInputActivity
 import com.healthjournal.ui.login.LoginActivity
 import com.healthjournal.ui.profile.ProfileActivity
 import com.healthjournal.ui.recommendation.RecommendationActivity
+import com.healthjournal.utils.NotificationUtils
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var user: FirebaseAuth
     private lateinit var mainAdapter: MainAdapter
+    private lateinit var database: FirebaseDatabase
     private val healthDataList: MutableList<ResultData> = mutableListOf()
-    private val database = Firebase.database
     private var dailyReport = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        // Create notification channel
+        NotificationUtils.createNotificationChannel(this)
+
+        // Schedule reminders
+        scheduleHealthReminders(this)
+
         setContentView(binding.root)
         user = FirebaseAuth.getInstance()
-
+        database = FirebaseDatabase.getInstance()
         userCheck()
         setupListener()
         populateHistory()
         navigationBottomBar()
     }
 
-    private fun navigationBottomBar(){
-        binding.bottomNavigation.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.nav_add -> addJournal()
-                R.id.nav_home -> home()
-                R.id.nav_profile -> profile()
+    private fun scheduleHealthReminders(context: Context) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val daysOfWeek = listOf(Calendar.MONDAY, Calendar.WEDNESDAY, Calendar.FRIDAY)
+        for (day in daysOfWeek.shuffled().take(3)) {
+            val calendar = Calendar.getInstance().apply {
+                set(Calendar.DAY_OF_WEEK, day)
+                set(Calendar.HOUR_OF_DAY, 9)  // Set reminder at 9 AM
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
             }
-            true
+
+            val intent = Intent(context, ReminderReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(
+                context, day, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+
+            alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                AlarmManager.INTERVAL_DAY * 7,  // Repeat every week
+                pendingIntent
+            )
         }
     }
+
+
+    private fun navigationBottomBar() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.nav_view)
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    finish()
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, ProfileActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+
+        binding.ivAdd.setOnClickListener {
+            if (dailyReport) {
+                Toast.makeText(this, "Daily Report Already Created", Toast.LENGTH_SHORT).show()
+            } else {
+                startActivity(Intent(this, JournalInputActivity::class.java))
+            }
+        }
+    }
+
 
     private fun getWeekCount() {
         val today = Calendar.getInstance()
@@ -116,6 +172,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun dailycheck() {
+        getWeekCount()
         val today = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(android.icu.util.Calendar.getInstance().time).toString()
         val userID = user.currentUser!!.uid
         database.getReference("users").child(userID).child("journal").get().addOnCompleteListener { task ->
@@ -124,7 +181,8 @@ class MainActivity : AppCompatActivity() {
                         if (it.child("date").value.toString() == today) {
                             dailyReport = true
                             switchLayout()
-                            populateTodayReport()
+                            val referencePath = it.key ?: return@forEach
+                            populateTodayReport(referencePath)
                         }
                     }
                 } else {
@@ -158,9 +216,12 @@ class MainActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user == null) {
             Toast.makeText(this, "Please Login to an account", Toast.LENGTH_SHORT).show()
+
+            // Redirect to LoginActivity
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
+
         } else {
             Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show()
             dailycheck()
@@ -183,14 +244,15 @@ class MainActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     healthDataList.clear()
                     task.result.children.forEach { snapshot ->
-                        val journalID = snapshot.child("date").value.toString()
+                        val journalID = snapshot.key.toString()
                         val bloodSugar = snapshot.child("bloodSugar").value.toString().toFloatOrNull() ?: 0f
                         val diastolicBP = snapshot.child("bloodPressureDIA").value.toString().toIntOrNull() ?: 0
                         val systolicBP = snapshot.child("bloodPressureSYS").value.toString().toIntOrNull() ?: 0
                         val BMI = snapshot.child("bmi").value.toString().toFloatOrNull() ?: 0f
                         val date = snapshot.child("date").value.toString()
+                        val task = snapshot.child("recommendation").child("task").value as? List<Map<String, Any>> ?: emptyList()
 
-                        val resultData = ResultData(journalID, bloodSugar, diastolicBP, systolicBP, BMI, date)
+                        val resultData = ResultData(journalID, bloodSugar, diastolicBP, systolicBP, BMI, date, task)
                         healthDataList.add(resultData)
                     }
                     mainAdapter.notifyDataSetChanged()
@@ -202,24 +264,19 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun populateTodayReport(){
-        val today = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(android.icu.util.Calendar.getInstance().time).toString()
+    private fun populateTodayReport(referencePath: String){
         val userID = user.currentUser!!.uid
-        database.getReference("users").child(userID).child("journal").get().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                task.result.children.forEach {
-                    if (it.child("date").value.toString() == today) {
-                        binding.tvBloodsugarLevel.text = it.child("bloodSugar").value.toString()+" mg/dL"
-                        binding.tvBloodsugarDesc.text = it.child("recommendation").child("bloodSugarAnalysis").value.toString()
-                        binding.tvBloodpressureLevel.text = it.child("bloodPressureDIA").value.toString()+"/"+it.child("bloodPressureSYS").value.toString()+" mm Hg"
-                        binding.tvBloodpressureDesc.text = it.child("recommendation").child("bloodPressureAnalysis").value.toString()
-                        binding.tvBmiLevel.text = it.child("BMI").value.toString() +" BMI"
-                        binding.tvBmiDesc.text = it.child("recommendation").child("BMIAnalysis").value.toString()
-                    }
-                }
+        database.getReference("users").child(userID).child("journal").child(referencePath).get().addOnCompleteListener {
+            if (it.isSuccessful) {
+                binding.tvBloodsugarLevel.text = it.result.child("bloodSugar").value.toString()+" mg/dL"
+                binding.tvBloodsugarDesc.text = it.result.child("recommendation").child("bloodSugarAnalysis").value.toString()
+                binding.tvBloodpressureLevel.text = it.result.child("bloodPressureDIA").value.toString()+"/"+it.result.child("bloodPressureSYS").value.toString()+" mm Hg"
+                binding.tvBloodpressureDesc.text = it.result.child("recommendation").child("bloodPressureAnalysis").value.toString()
+                binding.tvBmiLevel.text = it.result.child("BMI").value.toString() +" BMI"
+                binding.tvBmiDesc.text = it.result.child("recommendation").child("BMIAnalysis").value.toString()
             } else {
-                Log.d("error", task.exception!!.message.toString())
-                Toast.makeText(this, task.exception!!.message, Toast.LENGTH_SHORT).show()
+                Log.d("error", it.exception!!.message.toString())
+                Toast.makeText(this, it.exception!!.message, Toast.LENGTH_SHORT).show()
             }
         }
     }

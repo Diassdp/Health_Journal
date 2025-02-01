@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_profile"
     android:layout_margin="10dp"
-    android:layout_width="350dp"
-    android:layout_height="120dp">
+    android:padding="5dp"
+    android:layout_width="360dp"
+    android:layout_height="130dp">
 
     <TextView
         android:id="@+id/tv_day"
@@ -32,12 +33,12 @@
         app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_day"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_user"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="20dp"
         android:src="@drawable/profile_dummy_img"
@@ -45,9 +46,10 @@
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_date"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_date"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.647" />
 
     <TextView
         android:id="@+id/tv_sub_BSL"
@@ -56,7 +58,7 @@
         android:text="Blood Sugar Level : "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toEndOf="@+id/iv_user"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.346" />
@@ -82,7 +84,7 @@
         android:text="Blood Pressure Level :"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintHorizontal_bias="0.604"
         app:layout_constraintStart_toEndOf="@+id/iv_user"
         app:layout_constraintTop_toBottomOf="@+id/tv_sub_BSL"
         app:layout_constraintVertical_bias="0.042" />
@@ -108,12 +110,13 @@
         android:text="Recommended goals completed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toEndOf="@+id/iv_user"
         app:layout_constraintTop_toBottomOf="@+id/tv_sub_BPL"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.038" />
 
     <TextView
+        android:id="@+id/tv_goals_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="[lorem ipsum]"

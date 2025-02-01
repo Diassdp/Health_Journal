@@ -7,4 +7,16 @@
     <string name="password_length">Kolom ini tidak boleh kurang dari 8 karakter!</string>
     <string name="empty_field">Kolom ini tidak boleh kosong!</string>
     <string name="required_field">This field is required!</string>
+
+    // Activity Login
+
+    // Activity Register
+
+    // Activity Detail Journal
+
+    // Activity Journal Input
+
+    // Activity Recommendation
+
+    // Activity S
 </resources>

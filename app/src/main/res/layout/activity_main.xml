@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:background="@color/Accent_Dark_Gray"
+        android:background="@drawable/bg_dashboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
+z
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
@@ -53,46 +53,143 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
+            <!--Health Guide CL-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_guide_1"
+                android:layout_width="270dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="@id/tv_sub_title"
+                app:layout_constraintEnd_toEndOf="@id/tv_sub_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_sub_title"
+                android:background="@drawable/bg_form">
+                <ImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/cuboid"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
-        <ImageView
-            android:id="@+id/iv_instruction_1"
-            android:layout_width="203dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/frame_1"
-            app:layout_constraintTop_toBottomOf="@id/tv_sub_title" />
+                <TextView
+                    android:id="@+id/tv_guide"
+                    android:layout_width="210dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="Tetap tenang dan hindari emosi yang kuat atau stres selama setidaknya 30 menit sebelum pemeriksaan."
+                    android:textColor="@color/Accent_Light_Orange"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_logo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"
+                    app:layout_constraintStart_toEndOf="@id/iv_logo"
+                    app:layout_constraintTop_toTopOf="@id/iv_logo" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_guide_2"
+                android:layout_width="270dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="@id/cl_guide_1"
+                app:layout_constraintEnd_toEndOf="@id/cl_guide_1"
+                app:layout_constraintTop_toBottomOf="@id/cl_guide_1"
+                android:background="@drawable/bg_form">
+                <ImageView
+                    android:id="@+id/iv_logo_2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/cuboid"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
-        <ImageView
-            android:id="@+id/iv_instruction_2"
-            android:layout_width="203dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/frame_2"
-            app:layout_constraintTop_toBottomOf="@id/iv_instruction_1"/>
+                <TextView
+                    android:id="@+id/tv_guide_2"
+                    android:layout_width="210dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="Berpuasa (hanya minum air putih) selama 8-10 jam sebelum melakukan pemeriksaan."
+                    android:textColor="@color/Accent_Light_Orange"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_logo_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"
+                    app:layout_constraintStart_toEndOf="@id/iv_logo_2"
+                    app:layout_constraintTop_toTopOf="@id/iv_logo_2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_guide_3"
+                android:layout_width="270dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="@id/cl_guide_2"
+                app:layout_constraintEnd_toEndOf="@id/cl_guide_2"
+                app:layout_constraintTop_toBottomOf="@id/cl_guide_2"
+                android:background="@drawable/bg_form">
+                <ImageView
+                    android:id="@+id/iv_logo_3"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/cuboid"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
-        <ImageView
-            android:id="@+id/iv_instruction_3"
-            android:layout_width="203dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/frame_3"
-            app:layout_constraintTop_toBottomOf="@id/iv_instruction_2"/>
+                <TextView
+                    android:id="@+id/tv_guide_3"
+                    android:layout_width="210dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="Hindarkan minum kopi atau minuman berkafein lainnya sebelum pemeriksaan."
+                    android:textColor="@color/Accent_Light_Orange"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_logo_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"
+                    app:layout_constraintStart_toEndOf="@id/iv_logo_3"
+                    app:layout_constraintTop_toTopOf="@id/iv_logo_3" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_guide_4"
+                android:layout_width="270dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="@id/cl_guide_3"
+                app:layout_constraintEnd_toEndOf="@id/cl_guide_3"
+                app:layout_constraintTop_toBottomOf="@id/cl_guide_3"
+                android:background="@drawable/bg_form">
+                <ImageView
+                    android:id="@+id/iv_logo_4"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/cuboid"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
-            <ImageView
-            android:id="@+id/iv_instruction_4"
-            android:layout_width="203dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/frame_4"
-            app:layout_constraintTop_toBottomOf="@id/iv_instruction_3"/>
+                <TextView
+                    android:id="@+id/tv_guide_4"
+                    android:layout_width="210dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="Lakukan pemeriksaan secara rutin minimal dua kali seminggu."
+                    android:textColor="@color/Accent_Light_Orange"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_logo_4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"
+                    app:layout_constraintStart_toEndOf="@id/iv_logo_4"
+                    app:layout_constraintTop_toTopOf="@id/iv_logo_4" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -253,8 +350,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.700" />
+            app:layout_constraintTop_toBottomOf="@id/cl_Daily_Report_1"
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fl_daily_counter"
@@ -390,16 +487,28 @@
         tools:listitem="@layout/item_health_history"
         app:layout_constraintTop_toBottomOf="@+id/cl_Health_Report" />
 
+    <ImageView
+        android:id="@+id/iv_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:translationZ="10dp"
+        app:srcCompat="@drawable/ic_input_button"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/nav_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/Primary_Light"
+        android:background="@color/Primary_Dark"
+        app:itemIconSize="40dp"
         app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
-        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:menu="@menu/bottom_nav_menu" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

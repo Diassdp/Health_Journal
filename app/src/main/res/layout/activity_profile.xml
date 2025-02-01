@@ -85,7 +85,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Name"
+                android:text="Nama"
                 android:textColor="@color/Primary_Dark"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -102,49 +102,50 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_name">
 
-                <com.healthjournal.ui.custom.CustomEditText
+                <EditText
                     android:id="@+id/edt_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@drawable/bg_input_box"
                     android:ems="10"
                     android:inputType="textEmailAddress"
                     tools:ignore="SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
+            <!--
+                        <TextView
+                            android:id="@+id/tv_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="16dp"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Email"
+                            android:textColor="@color/Primary_Dark"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tl_name" />
 
-            <TextView
-                android:id="@+id/tv_email"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Email"
-                android:textColor="@color/Primary_Dark"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tl_name" />
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tl_email"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="32dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_email">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tl_email"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_email">
-
-                <com.healthjournal.ui.custom.CustomEditText
-                    android:id="@+id/edt_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:ems="10"
-                    android:inputType="textEmailAddress"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
+                            <EditText
+                                android:id="@+id/edt_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_input_box"
+                                android:ems="10"
+                                android:inputType="textEmailAddress"
+                                tools:ignore="SpeakableTextPresentCheck" />
+                        </com.google.android.material.textfield.TextInputLayout>
+            -->
 
             <TextView
                 android:id="@+id/tv_date"
@@ -153,123 +154,129 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Date Of Birth"
+                android:text="Tanggal Lahir"
                 android:textColor="@color/Primary_Dark"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tl_email" />
+                app:layout_constraintTop_toBottomOf="@+id/tl_name" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tl_dates"
+                android:id="@+id/tl_date_of_birth"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="32dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="5dp"
+                android:hint="Tanggal Lahir"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tl_email"
-                app:layout_constraintVertical_bias="0.119">
+                app:layout_constraintTop_toBottomOf="@+id/tv_date">
 
                 <EditText
-                    android:id="@+id/edt_dates"
+                    android:id="@+id/edt_date"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:background="@color/white" />
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:background="@drawable/bg_input_box"
+                    android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_input_height"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/bg_input"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_input_weight"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.096"
+                app:layout_constraintHorizontal_bias="0.137"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tl_dates"
-                app:layout_constraintVertical_bias="0.226">
+                app:layout_constraintTop_toTopOf="@+id/cl_input_weight">
 
                 <TextView
                     android:id="@+id/tv_input_height"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="HEIGHT"
+                    android:text="Tinggi Badan\n(CM)"
                     android:textAlignment="center"
                     android:textColor="@color/Primary_Dark"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tl_input_height"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
+                <EditText
+                    android:id="@+id/edt_input_height"
+                    android:layout_width="65dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_input_box"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:padding="2dp"
+                    android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_input_height">
-
-                    <EditText
-                        android:id="@+id/edt_input_height"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:background="@color/white" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_input_height" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_input_weight"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/bg_input"
+                android:padding="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.828"
+                app:layout_constraintHorizontal_bias="0.853"
                 app:layout_constraintStart_toEndOf="@+id/cl_input_height"
-                app:layout_constraintTop_toTopOf="@id/cl_input_height"
-                app:layout_constraintVertical_bias="0.0">
+                app:layout_constraintTop_toBottomOf="@+id/tl_date_of_birth"
+                app:layout_constraintVertical_bias="0.167">
 
                 <TextView
                     android:id="@+id/tv_input_weight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="WEIGHT"
+                    android:text="Berat Badan\n(kg)"
                     android:textAlignment="center"
                     android:textColor="@color/Primary_Dark"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tl_input_weight"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="24dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_input_weight">
-
-                    <EditText
-                        android:id="@+id/edt_input_weight"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:background="@color/white" />
-
-                </com.google.android.material.textfield.TextInputLayout>
+                <EditText
+                    android:id="@+id/edt_input_weight"
+                    android:layout_width="65dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_input_box"
+                    android:inputType="number"
+                    android:padding="2dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_input_weight"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/tv_input_weight"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_input_weight" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_update_data"
                 android:layout_width="254dp"
                 android:layout_height="39dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/bg_button"
                 android:text="Input Data"
                 android:textAllCaps="false"
@@ -279,7 +286,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.496"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cl_input_height" />
+                app:layout_constraintTop_toBottomOf="@+id/cl_input_weight" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_logout"

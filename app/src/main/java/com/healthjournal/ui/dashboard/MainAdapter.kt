@@ -19,6 +19,7 @@ class MainAdapter(private val healthDataList: MutableList<ResultData>) : Recycle
         val tvDate: TextView = view.findViewById(R.id.tv_date)
         val tvBloodSugar: TextView = view.findViewById(R.id.tv_BS_Level)
         val tvBloodPressure: TextView = view.findViewById(R.id.tv_BP_Level)
+        val tvGoals: TextView = view.findViewById(R.id.tv_goals_count)
     }
 
     // Function to update the list and notify the adapter
@@ -48,8 +49,19 @@ class MainAdapter(private val healthDataList: MutableList<ResultData>) : Recycle
         }
     }
 
-    private fun countGoals (){
-
+    private fun countGoals (list: List<Map<String, Any>>): String {
+        var completedGoals = 0
+        var goalsCount = 0
+        for (item in list) {
+            if (item["completed"] == true) {
+                completedGoals++
+            }
+            goalsCount++
+        }
+        if (completedGoals == 0) {
+            return "No goals completed"
+        }
+        return "$completedGoals/$goalsCount goals completed"
     }
 
     override fun onBindViewHolder(holder: HealthViewHolder, position: Int) {
@@ -59,11 +71,11 @@ class MainAdapter(private val healthDataList: MutableList<ResultData>) : Recycle
         holder.tvDate.text = healthData.date
         holder.tvBloodSugar.text = "${healthData.bloodSugar} mg/dL"
         holder.tvBloodPressure.text = "${healthData.diastolicBP}/${healthData.systolicBP} mm Hg"
-
+        holder.tvGoals.text = countGoals(healthData.task)
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailJournalActivity::class.java).apply {
-                putExtra("HEALTH_DATA", healthData)
+                putExtra("JOURNAL_KEY", healthData.journalID)
             }
             context.startActivity(intent)
         }

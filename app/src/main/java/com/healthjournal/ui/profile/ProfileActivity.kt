@@ -24,9 +24,13 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        user = FirebaseAuth.getInstance()
+
         setupListener()
         populateData()
     }
+
 
     private fun setupListener() {
         binding.btnLogout.setOnClickListener {
@@ -47,13 +51,11 @@ class ProfileActivity : AppCompatActivity() {
     private fun updateData(){
         val userID = user.currentUser?.uid
         val name = binding.edtName.text.toString()
-        val email = binding.edtEmail.text.toString()
-        val date = binding.edtDates.text.toString()
+        val date = binding.edtDate.text.toString()
         val weight = binding.edtInputWeight.text.toString()
         val height = binding.edtInputHeight.text.toString()
         val userRef = database.getReference("users").child(userID!!)
         userRef.child("name").setValue(name)
-        userRef.child("email").setValue(email)
         userRef.child("date").setValue(date)
         userRef.child("weight").setValue(weight)
         userRef.child("height").setValue(height)
@@ -61,13 +63,14 @@ class ProfileActivity : AppCompatActivity() {
         populateData()
     }
 
-    private fun populateData(){
-        val userID = user.currentUser?.uid
-        val userRef = database.getReference("users").child(userID!!)
-        userRef.get().addOnCompleteListener(ProfileActivity()){
-            if (it.isSuccessful){
+    private fun populateData() {
+        val userID = user.currentUser?.uid ?: return
+        val userRef = database.getReference("users").child(userID)
+
+        userRef.get().addOnCompleteListener(this) {
+            if (it.isSuccessful) {
                 binding.edtName.setText(it.result.child("name").value.toString())
-                binding.edtDates.setText(it.result.child("date").value.toString())
+                binding.edtDate.setText(it.result.child("date").value.toString())
                 binding.edtInputHeight.setText(it.result.child("height").value.toString())
                 binding.edtInputWeight.setText(it.result.child("weight").value.toString())
             } else {
@@ -76,6 +79,7 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
 }

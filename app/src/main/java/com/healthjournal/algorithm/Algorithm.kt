@@ -75,35 +75,69 @@ class AlgoritmaKesehatan {
         val tasks = mutableListOf<Map<String, Any>>()
 
         // Task for Blood Sugar Control
-        if (healthData.bloodSugar > 140) {
-            tasks.add(mapOf("task" to "Cek kadar gula darah 2 kali sehari.", "completed" to false))
-            tasks.add(mapOf("task" to "Kurangi konsumsi makanan tinggi gula.", "completed" to false))
-        } else if (healthData.bloodSugar < 70) {
-            tasks.add(mapOf("task" to "Sediakan camilan sehat seperti buah atau kacang.", "completed" to false))
+        when {
+            healthData.bloodSugar > 140 -> {
+                tasks.add(mapOf("task" to "Kurangi konsumsi makanan tinggi gula dan karbohidrat olahan.", "completed" to false))
+                tasks.add(mapOf("task" to "Perbanyak konsumsi makanan berserat seperti sayuran dan biji-bijian.", "completed" to false))
+                tasks.add(mapOf("task" to "Lakukan olahraga ringan setelah makan untuk membantu mengontrol gula darah.", "completed" to false))
+            }
+            healthData.bloodSugar < 70 -> {
+                tasks.add(mapOf("task" to "Sediakan camilan sehat seperti buah atau kacang.", "completed" to false))
+                tasks.add(mapOf("task" to "Jangan melewatkan makan, usahakan makan dalam porsi kecil tapi sering.", "completed" to false))
+                tasks.add(mapOf("task" to "Konsumsi sumber karbohidrat kompleks untuk menjaga kadar gula tetap stabil.", "completed" to false))
+            }
+            else -> {
+                tasks.add(mapOf("task" to "Pertahankan pola makan sehat dan seimbang untuk menjaga kadar gula darah stabil.", "completed" to false))
+            }
         }
 
         // Task for Blood Pressure Control
-        if (healthData.systolicBP > 120 || healthData.diastolicBP > 80) {
-            tasks.add(mapOf("task" to "Lakukan olahraga ringan seperti jalan kaki selama 30 menit.", "completed" to false))
-            tasks.add(mapOf("task" to "Kurangi makanan asin dan berlemak.", "completed" to false))
-        } else if (healthData.systolicBP < 90) {
-            tasks.add(mapOf("task" to "Perbanyak minum air putih dan istirahat.", "completed" to false))
+        when {
+            healthData.systolicBP > 120 || healthData.diastolicBP > 80 -> {
+                tasks.add(mapOf("task" to "Lakukan olahraga ringan seperti jalan kaki selama 30 menit.", "completed" to false))
+                tasks.add(mapOf("task" to "Kurangi konsumsi garam dan makanan berlemak.", "completed" to false))
+                tasks.add(mapOf("task" to "Konsumsi lebih banyak makanan tinggi kalium seperti pisang dan bayam.", "completed" to false))
+            }
+            healthData.systolicBP < 90 -> {
+                tasks.add(mapOf("task" to "Perbanyak minum air putih dan istirahat cukup.", "completed" to false))
+                tasks.add(mapOf("task" to "Konsumsi makanan bergizi yang bisa membantu menaikkan tekanan darah.", "completed" to false))
+            }
+            else -> {
+                tasks.add(mapOf("task" to "Jaga pola hidup sehat agar tekanan darah tetap stabil.", "completed" to false))
+            }
         }
 
         // Task for BMI Control
-        if (healthData.BMI > 25) {
-            tasks.add(mapOf("task" to "Lakukan olahraga rutin minimal 3 kali seminggu.", "completed" to false))
-            tasks.add(mapOf("task" to "Konsumsi lebih banyak sayuran dan serat.", "completed" to false))
-        } else if (healthData.BMI < 18.5) {
-            tasks.add(mapOf("task" to "Tambahkan makanan tinggi kalori seperti kacang dan susu.", "completed" to false))
+        when {
+            healthData.BMI > 25 -> {
+                tasks.add(mapOf("task" to "Lakukan olahraga rutin minimal 3 kali seminggu.", "completed" to false))
+                tasks.add(mapOf("task" to "Konsumsi lebih banyak sayuran dan serat.", "completed" to false))
+                tasks.add(mapOf("task" to "Kurangi makanan tinggi lemak dan gula.", "completed" to false))
+            }
+            healthData.BMI < 18.5 -> {
+                tasks.add(mapOf("task" to "Tambahkan makanan tinggi kalori seperti kacang dan susu.", "completed" to false))
+                tasks.add(mapOf("task" to "Pastikan asupan protein dan karbohidrat mencukupi.", "completed" to false))
+            }
+            else -> {
+                tasks.add(mapOf("task" to "Pertahankan berat badan ideal dengan pola makan dan olahraga seimbang.", "completed" to false))
+            }
         }
 
         // Age and Gender Specific Tasks
         if (healthData.age > 50) {
             tasks.add(mapOf("task" to "Lakukan pemeriksaan kesehatan rutin setiap bulan.", "completed" to false))
+            tasks.add(mapOf("task" to "Jaga kesehatan tulang dengan konsumsi kalsium dan vitamin D.", "completed" to false))
         }
-        if (healthData.gender == "Female" || healthData.gender == "Other") {
-            tasks.add(mapOf("task" to "Perhatikan kebutuhan kalsium dan zat besi.", "completed" to false))
+
+        when (healthData.gender) {
+            "Female", "Other" -> {
+                tasks.add(mapOf("task" to "Perhatikan kebutuhan kalsium dan zat besi, terutama saat menstruasi atau menopause.", "completed" to false))
+                tasks.add(mapOf("task" to "Pastikan mendapatkan asupan vitamin D yang cukup.", "completed" to false))
+            }
+            "Male" -> {
+                tasks.add(mapOf("task" to "Perhatikan kesehatan prostat dengan pola makan sehat.", "completed" to false))
+                tasks.add(mapOf("task" to "Jaga kesehatan jantung dengan olahraga teratur.", "completed" to false))
+            }
         }
 
         return tasks
