@@ -14,7 +14,7 @@ class RecommendationAdapter(
 ) : RecyclerView.Adapter<RecommendationAdapter.RecommendationViewHolder>() {
 
     inner class RecommendationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvGoalName: TextView = view.findViewById(R.id.tv_goal_name)
+        val tvGoal: TextView = view.findViewById(R.id.tv_goal)
         val checkBox: CheckBox = view.findViewById(R.id.toggle)
     }
 
@@ -26,7 +26,7 @@ class RecommendationAdapter(
 
     override fun onBindViewHolder(holder: RecommendationViewHolder, position: Int) {
         val (task, isCompleted) = recommendationList[position]
-        holder.tvGoalName.text = task
+        holder.tvGoal.text = task
         holder.checkBox.isChecked = isCompleted
         holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
             onCheckedChange(position, isChecked)

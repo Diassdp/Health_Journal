@@ -39,11 +39,13 @@ class RecommendationActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     task.result.children.forEach {
                         if (it.child("date").value.toString() == today) {
+                            val bmiValue = it.child("BMI").value.toString().toDoubleOrNull() ?: 0.0
+
                             binding.tvBloodsugarLevel2.text = "${it.child("bloodSugar").value} mg/dL"
                             binding.tvBloodsugarDesc.text = it.child("recommendation").child("bloodSugarAnalysis").value.toString()
                             binding.tvBloodpressureLevel2.text = "${it.child("bloodPressureDIA").value}/${it.child("bloodPressureSYS").value} mm Hg"
                             binding.tvBloodpressureDesc.text = it.child("recommendation").child("bloodPressureAnalysis").value.toString()
-                            binding.tvBMILevel2.text = "${it.child("BMI").value} BMI"
+                            binding.tvBMILevel2.text = "${bmiValue} BMI"
                             binding.tvBMIDesc.text = it.child("recommendation").child("BMIAnalysis").value.toString()
 
                             val tasks = it.child("recommendation").child("tasks").value

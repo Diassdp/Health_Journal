@@ -55,11 +55,14 @@ class DetailJournalActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val result = task.result
                         if (result.exists()) {
+                            val bmiValue = result.child("BMI").value.toString().toFloatOrNull() ?: 0f
+                            Log.d("debug", bmiValue.toString())
+
                             binding.tvBloodsugarLevel2.text = "${result.child("bloodSugar").value ?: "N/A"} mg/dL"
                             binding.tvBloodsugarDesc.text = result.child("recommendation").child("bloodSugarAnalysis").value?.toString() ?: "No data"
                             binding.tvBloodpressureLevel2.text = "${result.child("bloodPressureDIA").value ?: "N/A"}/${result.child("bloodPressureSYS").value ?: "N/A"} mm Hg"
                             binding.tvBloodpressureDesc.text = result.child("recommendation").child("bloodPressureAnalysis").value?.toString() ?: "No data"
-                            binding.tvBMILevel2.text = "${result.child("BMI").value ?: "N/A"} BMI"
+                            binding.tvBMILevel2.text = String.format("%.2f BMI", bmiValue)
                             binding.tvBMIDesc.text = result.child("recommendation").child("BMIAnalysis").value?.toString() ?: "No data"
                             binding.tvJournalNote.text = result.child("note").value?.toString() ?: "No notes available"
 
@@ -106,10 +109,9 @@ class DetailJournalActivity : AppCompatActivity() {
         }
     }
 
-        private fun setupListener() {
-            binding.btnDeleteHistory.setOnClickListener() {
-                deleteHistory()
-            }
+    private fun setupListener() {
+        binding.btnDeleteHistory.setOnClickListener() {
+            deleteHistory()
         }
-
+    }
 }

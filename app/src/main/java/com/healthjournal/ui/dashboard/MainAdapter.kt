@@ -1,6 +1,7 @@
 package com.healthjournal.ui.dashboard
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,19 +50,23 @@ class MainAdapter(private val healthDataList: MutableList<ResultData>) : Recycle
         }
     }
 
-    private fun countGoals (list: List<Map<String, Any>>): String {
+    private fun countGoals(taskList: List<Map<String, Any>>): String {
+        Log.d("debug", taskList.toString())
         var completedGoals = 0
-        var goalsCount = 0
-        for (item in list) {
-            if (item["completed"] == true) {
+        val totalGoals = taskList.size
+
+        for (task in taskList) {
+            val isCompleted = task["completed"] as? Boolean ?: false
+            if (isCompleted) {
                 completedGoals++
             }
-            goalsCount++
         }
-        if (completedGoals == 0) {
-            return "No goals completed"
+
+        return when {
+            totalGoals == 0 -> "No goals available"
+            completedGoals == 0 -> "No goals completed"
+            else -> "$completedGoals/$totalGoals goals completed"
         }
-        return "$completedGoals/$goalsCount goals completed"
     }
 
     override fun onBindViewHolder(holder: HealthViewHolder, position: Int) {

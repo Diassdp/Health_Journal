@@ -41,16 +41,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         // Create notification channel
         NotificationUtils.createNotificationChannel(this)
-
         // Schedule reminders
         scheduleHealthReminders(this)
-
         setContentView(binding.root)
         user = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
+
         userCheck()
         setupListener()
-        populateHistory()
         navigationBottomBar()
     }
 
@@ -141,33 +139,12 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-
-
-    private fun addJournal(){
-        if (dailyReport != false){
-            Toast.makeText(this, "Daily Report Already Created", Toast.LENGTH_SHORT).show()
-        } else {
-            startActivity(Intent(this, JournalInputActivity::class.java))
-        }
-    }
-
-    private fun home(){
-    }
-
-    private fun profile(){
-        intent = Intent(this, ProfileActivity::class.java)
-        startActivity(intent)
-    }
-
-
     private fun setupListener(){
         binding.btnRecomendation.setOnClickListener {
             startActivity(Intent(this, RecommendationActivity::class.java))
-            finish()
         }
         binding.btnInputData.setOnClickListener {
             startActivity(Intent(this, JournalInputActivity::class.java))
-            finish()
         }
     }
 
@@ -213,19 +190,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun userCheck() {
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user == null) {
-            Toast.makeText(this, "Please Login to an account", Toast.LENGTH_SHORT).show()
+        user = FirebaseAuth.getInstance()
 
-            // Redirect to LoginActivity
+        if (user.currentUser == null) {
+            Toast.makeText(this, "Please Login to an account", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
-
         } else {
             Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show()
             dailycheck()
             getWeekCount()
+            populateHistory()
         }
     }
 
@@ -250,7 +226,7 @@ class MainActivity : AppCompatActivity() {
                         val systolicBP = snapshot.child("bloodPressureSYS").value.toString().toIntOrNull() ?: 0
                         val BMI = snapshot.child("bmi").value.toString().toFloatOrNull() ?: 0f
                         val date = snapshot.child("date").value.toString()
-                        val task = snapshot.child("recommendation").child("task").value as? List<Map<String, Any>> ?: emptyList()
+                        val task = snapshot.child("recommendation").child("tasks").value as? List<Map<String, Any>> ?: emptyList()
 
                         val resultData = ResultData(journalID, bloodSugar, diastolicBP, systolicBP, BMI, date, task)
                         healthDataList.add(resultData)
@@ -264,21 +240,27 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun populateTodayReport(referencePath: String){
-        val userID = user.currentUser!!.uid
-        database.getReference("users").child(userID).child("journal").child(referencePath).get().addOnCompleteListener {
-            if (it.isSuccessful) {
-                binding.tvBloodsugarLevel.text = it.result.child("bloodSugar").value.toString()+" mg/dL"
-                binding.tvBloodsugarDesc.text = it.result.child("recommendation").child("bloodSugarAnalysis").value.toString()
-                binding.tvBloodpressureLevel.text = it.result.child("bloodPressureDIA").value.toString()+"/"+it.result.child("bloodPressureSYS").value.toString()+" mm Hg"
-                binding.tvBloodpressureDesc.text = it.result.child("recommendation").child("bloodPressureAnalysis").value.toString()
-                binding.tvBmiLevel.text = it.result.child("BMI").value.toString() +" BMI"
-                binding.tvBmiDesc.text = it.result.child("recommendation").child("BMIAnalysis").value.toString()
-            } else {
-                Log.d("error", it.exception!!.message.toString())
-                Toast.makeText(this, it.exception!!.message, Toast.LENGTH_SHORT).show()
-            }
+    private fun populateTodayReport(referencePath: String) {
+        if (!::user.isInitialized || user.currentUser == null) {
+            Log.e("MainActivity", "User not logged in, cannot fetch today's report")
+            return
         }
-    }
 
+        val userID = user.currentUser!!.uid
+        database.getReference("users").child(userID).child("journal").child(referencePath)
+            .get().addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val bmiValue = it.result.child("BMI").value.toString().toDoubleOrNull() ?: 0.0
+                    binding.tvBloodsugarLevel.text = it.result.child("bloodSugar").value.toString() + " mg/dL"
+                    binding.tvBloodsugarDesc.text = it.result.child("recommendation").child("bloodSugarAnalysis").value.toString()
+                    binding.tvBloodpressureLevel.text = it.result.child("bloodPressureDIA").value.toString() + "/" + it.result.child("bloodPressureSYS").value.toString() + " mm Hg"
+                    binding.tvBloodpressureDesc.text = it.result.child("recommendation").child("bloodPressureAnalysis").value.toString()
+                    binding.tvBmiLevel.text = String.format(Locale.getDefault(), "%.2f BMI", bmiValue)
+                    binding.tvBmiDesc.text = it.result.child("recommendation").child("BMIAnalysis").value.toString()
+                } else {
+                    Log.e("MainActivity", "Error fetching today's report: ${it.exception?.message}")
+                    Toast.makeText(this, it.exception?.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
 }
