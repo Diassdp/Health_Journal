@@ -231,6 +231,10 @@ class MainActivity : AppCompatActivity() {
                         val resultData = ResultData(journalID, bloodSugar, diastolicBP, systolicBP, BMI, date, task)
                         healthDataList.add(resultData)
                     }
+
+                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    healthDataList.sortByDescending { it.date.let { date -> dateFormat.parse(date) } }
+
                     mainAdapter.notifyDataSetChanged()
                 } else {
                     Log.d("error", task.exception?.message.toString())
