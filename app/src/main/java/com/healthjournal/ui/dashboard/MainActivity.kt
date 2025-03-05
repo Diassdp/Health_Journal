@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.healthjournal.R
 import com.healthjournal.data.ResultData
@@ -23,6 +26,7 @@ import com.healthjournal.ui.journal.input.JournalInputActivity
 import com.healthjournal.ui.login.LoginActivity
 import com.healthjournal.ui.profile.ProfileActivity
 import com.healthjournal.ui.recommendation.RecommendationActivity
+import com.healthjournal.ui.users.UsersInputActivity
 import com.healthjournal.utils.NotificationUtils
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -115,22 +119,28 @@ class MainActivity : AppCompatActivity() {
 
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
+        // Set start of the week (Sunday)
         today.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
-        val startDate = dateFormat.format(today.time)
+        val startDate = today.time
 
+        // Set end of the week (Saturday)
         val endDate = today.clone() as Calendar
         endDate.add(Calendar.DAY_OF_WEEK, 6)
-        val endDateString = dateFormat.format(endDate.time)
+        val endDateDate = endDate.time
 
-        database.getReference("users").child(userID).child("journal")
-            .get()
+        database.getReference("users").child(userID).child("journal").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     count = task.result.children.count { snapshot ->
-                        val date = snapshot.child("date").value.toString()
-                        date >= startDate && date <= endDateString
+                        val dateString = snapshot.child("date").value.toString()
+                        val entryDate = try {
+                            dateFormat.parse(dateString)
+                        } catch (e: Exception) {
+                            null
+                        }
+                        entryDate?.let { it in startDate..endDateDate } ?: false
                     }
-                    Log.d("debug", "Entries found: $count for week: $startDate - $endDateString")
+                    Log.d("debug", "Entries found: $count for week: ${dateFormat.format(startDate)} - ${dateFormat.format(endDateDate)}")
                     binding.tvDailyCounter.text = "$count/7"
                 } else {
                     Log.e("error", task.exception?.message.toString())
@@ -138,6 +148,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
     }
+
 
     private fun setupListener(){
         binding.btnRecomendation.setOnClickListener {
@@ -190,21 +201,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun userCheck() {
-        user = FirebaseAuth.getInstance()
-
-        if (user.currentUser == null) {
-            Toast.makeText(this, "Please Login to an account", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        } else {
-            Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show()
-            dailycheck()
-            getWeekCount()
-            populateHistory()
+        val firebaseUser = user.currentUser
+        if (firebaseUser != null) {
+            val userID = firebaseUser.uid
+            val userRef = database.getReference("users").child(userID)
+            userRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    if (task.result.exists() && task.result.childrenCount > 0) {
+                        Toast.makeText(this, "Selamat Kembali!", Toast.LENGTH_SHORT).show()
+                        dailycheck()
+                        getWeekCount()
+                        populateHistory()
+                    } else {
+                        Toast.makeText(this, "Tidak ada user data kesehatan. Tolong isi data kesehatan profile.", Toast.LENGTH_LONG).show()
+                        startActivity(Intent(this@MainActivity, UsersInputActivity::class.java))
+                        finish()
+                    }
+                } else {
+                    Toast.makeText(this, "Failed to retrieve user data.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
-
 
     private fun populateHistory() {
         val userID = user.currentUser!!.uid
@@ -215,32 +233,35 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
         }
 
-        database.getReference("users").child(userID).child("journal").get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    healthDataList.clear()
-                    task.result.children.forEach { snapshot ->
-                        val journalID = snapshot.key.toString()
-                        val bloodSugar = snapshot.child("bloodSugar").value.toString().toFloatOrNull() ?: 0f
-                        val diastolicBP = snapshot.child("bloodPressureDIA").value.toString().toIntOrNull() ?: 0
-                        val systolicBP = snapshot.child("bloodPressureSYS").value.toString().toIntOrNull() ?: 0
-                        val BMI = snapshot.child("bmi").value.toString().toFloatOrNull() ?: 0f
-                        val date = snapshot.child("date").value.toString()
-                        val task = snapshot.child("recommendation").child("tasks").value as? List<Map<String, Any>> ?: emptyList()
+        val historyRef = database.getReference("users").child(userID).child("journal")
 
-                        val resultData = ResultData(journalID, bloodSugar, diastolicBP, systolicBP, BMI, date, task)
-                        healthDataList.add(resultData)
-                    }
+        historyRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                healthDataList.clear()
+                snapshot.children.forEach { data ->
+                    val journalID = data.key.toString()
+                    val bloodSugar = data.child("bloodSugar").value.toString().toFloatOrNull() ?: 0f
+                    val diastolicBP = data.child("bloodPressureDIA").value.toString().toIntOrNull() ?: 0
+                    val systolicBP = data.child("bloodPressureSYS").value.toString().toIntOrNull() ?: 0
+                    val BMI = data.child("bmi").value.toString().toFloatOrNull() ?: 0f
+                    val date = data.child("date").value.toString()
+                    val task = data.child("recommendation").child("tasks").value as? List<Map<String, Any>> ?: emptyList()
 
-                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                    healthDataList.sortByDescending { it.date.let { date -> dateFormat.parse(date) } }
-
-                    mainAdapter.notifyDataSetChanged()
-                } else {
-                    Log.d("error", task.exception?.message.toString())
-                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
+                    val resultData = ResultData(journalID, bloodSugar, diastolicBP, systolicBP, BMI, date, task)
+                    healthDataList.add(resultData)
                 }
+
+                val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                healthDataList.sortByDescending { it.date.let { date -> dateFormat.parse(date) } }
+
+                mainAdapter.notifyDataSetChanged()
             }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("error", error.message)
+                Toast.makeText(this@MainActivity, error.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 
@@ -257,7 +278,7 @@ class MainActivity : AppCompatActivity() {
                     val bmiValue = it.result.child("BMI").value.toString().toDoubleOrNull() ?: 0.0
                     binding.tvBloodsugarLevel.text = it.result.child("bloodSugar").value.toString() + " mg/dL"
                     binding.tvBloodsugarDesc.text = it.result.child("recommendation").child("bloodSugarAnalysis").value.toString()
-                    binding.tvBloodpressureLevel.text = it.result.child("bloodPressureDIA").value.toString() + "/" + it.result.child("bloodPressureSYS").value.toString() + " mm Hg"
+                    binding.tvBloodpressureLevel.text = it.result.child("bloodPressureSYS").value.toString() + "/" + it.result.child("bloodPressureDIA").value.toString() + " mm Hg"
                     binding.tvBloodpressureDesc.text = it.result.child("recommendation").child("bloodPressureAnalysis").value.toString()
                     binding.tvBmiLevel.text = String.format(Locale.getDefault(), "%.2f BMI", bmiValue)
                     binding.tvBmiDesc.text = it.result.child("recommendation").child("BMIAnalysis").value.toString()

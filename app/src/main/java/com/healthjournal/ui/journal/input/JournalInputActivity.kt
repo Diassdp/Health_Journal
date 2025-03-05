@@ -97,7 +97,7 @@ class JournalInputActivity : AppCompatActivity() {
         if (weight != null && bloodPressureSYS.isNotEmpty() && bloodPressureDIA.isNotEmpty() && bloodSugar.isNotEmpty()) {
             database.getReference("users").child(userId).child("height").get().addOnSuccessListener { snapshot ->
                 val BMI = calculateBMI(weight, height)
-                val healthData = HealthData(bloodSugar.toFloat(), bloodPressureSYS.toInt(), bloodPressureDIA.toInt(), BMI,age,gender)
+                val healthData = HealthData(bloodSugar.toFloat(),bloodPressureDIA.toInt(),bloodPressureSYS.toInt(), BMI,age,gender)
                 val recommendation = AlgoritmaKesehatan().recommendationOfTheDay(healthData)
 
                 val data = hashMapOf(

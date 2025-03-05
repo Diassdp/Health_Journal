@@ -71,7 +71,7 @@ class ProfileActivity : AppCompatActivity() {
             if (it.isSuccessful) {
                 binding.edtName.setText(it.result.child("name").value.toString())
                 binding.tvMyname.text = it.result.child("name").value.toString()
-                binding.tvMyemail.text = it.result.child("email").value.toString()
+                binding.tvMyemail.text = user.currentUser?.email.toString()
                 binding.edtDate.setText(it.result.child("date").value.toString())
                 binding.edtInputHeight.setText(it.result.child("height").value.toString())
                 binding.edtInputWeight.setText(it.result.child("weight").value.toString())

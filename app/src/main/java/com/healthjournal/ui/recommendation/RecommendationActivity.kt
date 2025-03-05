@@ -43,9 +43,9 @@ class RecommendationActivity : AppCompatActivity() {
 
                             binding.tvBloodsugarLevel2.text = "${it.child("bloodSugar").value} mg/dL"
                             binding.tvBloodsugarDesc.text = it.child("recommendation").child("bloodSugarAnalysis").value.toString()
-                            binding.tvBloodpressureLevel2.text = "${it.child("bloodPressureDIA").value}/${it.child("bloodPressureSYS").value} mm Hg"
+                            binding.tvBloodpressureLevel2.text = "${it.child("bloodPressureSYS").value}/${it.child("bloodPressureDIA").value} mm Hg"
                             binding.tvBloodpressureDesc.text = it.child("recommendation").child("bloodPressureAnalysis").value.toString()
-                            binding.tvBMILevel2.text = "${bmiValue} BMI"
+                            binding.tvBMILevel2.text = String.format(Locale.getDefault(), "%.2f BMI", bmiValue)
                             binding.tvBMIDesc.text = it.child("recommendation").child("BMIAnalysis").value.toString()
 
                             val tasks = it.child("recommendation").child("tasks").value

@@ -21,14 +21,14 @@ class AlgoritmaKesehatan {
         return when (healthData.gender) {
             "Female", "Other" -> when {
                 healthData.bloodSugar < 70 -> "Gula darah rendah, konsumsi makanan manis seperti buah atau madu."
-                healthData.bloodSugar in 70.0..140.0 -> "Gula darah normal, pertahankan pola makan sehat."
-                healthData.bloodSugar > 140 -> "Gula darah tinggi, kurangi makanan manis dan lakukan olahraga teratur."
+                healthData.bloodSugar in 70.0..130.0 -> "Gula darah normal, pertahankan pola makan sehat."
+                healthData.bloodSugar > 130 -> "Gula darah tinggi, kurangi makanan manis dan lakukan olahraga teratur."
                 else -> "Data gula darah tidak valid."
             }
             "Male" -> when {
                 healthData.bloodSugar < 70 -> "Gula darah rendah, segera konsumsi makanan berkarbohidrat."
-                healthData.bloodSugar in 70.0..130.0 -> "Gula darah normal, jaga pola makan seimbang."
-                healthData.bloodSugar > 130 -> "Gula darah tinggi, batasi konsumsi gula dan periksa kesehatan secara berkala."
+                healthData.bloodSugar in 70.0..120.0 -> "Gula darah normal, jaga pola makan seimbang."
+                healthData.bloodSugar > 120 -> "Gula darah tinggi, batasi konsumsi gula dan periksa kesehatan secara berkala."
                 else -> "Data gula darah tidak valid."
             }
             else -> "Data gula darah tidak valid."
