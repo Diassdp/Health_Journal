@@ -74,7 +74,6 @@ class AlgoritmaKesehatan {
     fun getTaskBasedData(healthData: HealthData): List<Map<String, Any>> {
         val tasks = mutableListOf<Map<String, Any>>()
 
-        // Task for Blood Sugar Control
         when {
             healthData.bloodSugar > 140 -> {
                 tasks.add(mapOf("task" to "Kurangi konsumsi makanan tinggi gula dan karbohidrat olahan.", "completed" to false))
@@ -91,7 +90,6 @@ class AlgoritmaKesehatan {
             }
         }
 
-        // Task for Blood Pressure Control
         when {
             healthData.systolicBP > 120 || healthData.diastolicBP > 80 -> {
                 tasks.add(mapOf("task" to "Lakukan olahraga ringan seperti jalan kaki selama 30 menit.", "completed" to false))
@@ -107,7 +105,6 @@ class AlgoritmaKesehatan {
             }
         }
 
-        // Task for BMI Control
         when {
             healthData.BMI > 25 -> {
                 tasks.add(mapOf("task" to "Lakukan olahraga rutin minimal 3 kali seminggu.", "completed" to false))

@@ -14,10 +14,10 @@
         android:background="@drawable/bg_form"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36">
+        app:layout_constraintVertical_bias="0.377">
 
         <TextView
             android:id="@+id/textView8"
@@ -67,9 +67,9 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Email"
-            android:textStyle="bold"
             android:textColor="@color/Primary_Dark"
             android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -122,8 +122,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:textColor="@color/black"
                 android:inputType="textPassword"
+                android:textColor="@color/black"
                 tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
