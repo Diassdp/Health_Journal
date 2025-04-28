@@ -43,9 +43,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        // Create notification channel
         NotificationUtils.createNotificationChannel(this)
-        // Schedule reminders
         scheduleHealthReminders(this)
         setContentView(binding.root)
         user = FirebaseAuth.getInstance()
@@ -221,6 +219,9 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Failed to retrieve user data.", Toast.LENGTH_SHORT).show()
                 }
             }
+        } else {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 
