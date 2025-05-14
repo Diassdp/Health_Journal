@@ -278,7 +278,7 @@
                 android:layout_height="39dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/bg_button"
-                android:text="Input Data"
+                android:text="Update Profile"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="14sp"

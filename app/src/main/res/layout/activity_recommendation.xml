@@ -146,7 +146,6 @@
             tools:text="This is still considered an acceptable range, and is associated with good health." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <TextView
         android:id="@+id/tv_title_recommendation"
         android:layout_width="wrap_content"
@@ -162,14 +161,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_tasks"
+    <ScrollView
+        android:id="@+id/sv_tasks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:itemCount="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/item_goals_recommendation"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_recommendation" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_recommendation">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tasks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_goals_recommendation" />
+
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
