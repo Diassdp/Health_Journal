@@ -23,6 +23,7 @@ import com.healthjournal.data.ResultData
 import com.healthjournal.databinding.ActivityMainBinding
 import com.healthjournal.receiver.ReminderReceiver
 import com.healthjournal.ui.journal.input.JournalInputActivity
+import com.healthjournal.ui.laporan
 import com.healthjournal.ui.login.LoginActivity
 import com.healthjournal.ui.profile.ProfileActivity
 import com.healthjournal.ui.recommendation.RecommendationActivity
@@ -56,12 +57,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun scheduleHealthReminders(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
         val daysOfWeek = listOf(Calendar.MONDAY, Calendar.WEDNESDAY, Calendar.FRIDAY)
+
         for (day in daysOfWeek.shuffled().take(3)) {
             val calendar = Calendar.getInstance().apply {
                 set(Calendar.DAY_OF_WEEK, day)
-                set(Calendar.HOUR_OF_DAY, 9)  // Set reminder at 9 AM
+                set(Calendar.HOUR_OF_DAY, 9)
                 set(Calendar.MINUTE, 0)
                 set(Calendar.SECOND, 0)
             }
@@ -74,12 +75,11 @@ class MainActivity : AppCompatActivity() {
             alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,
-                AlarmManager.INTERVAL_DAY * 7,  // Repeat every week
+                AlarmManager.INTERVAL_DAY * 7,
                 pendingIntent
             )
         }
     }
-
 
     private fun navigationBottomBar() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.nav_view)
@@ -102,13 +102,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.ivAdd.setOnClickListener {
             if (dailyReport) {
-                Toast.makeText(this, "Daily Report Already Created", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Laporan harian sudah dibuat", Toast.LENGTH_SHORT).show()
             } else {
                 startActivity(Intent(this, JournalInputActivity::class.java))
             }
         }
     }
-
 
     private fun getWeekCount() {
         val today = Calendar.getInstance()
@@ -117,11 +116,9 @@ class MainActivity : AppCompatActivity() {
 
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
-        // Set start of the week (Sunday)
         today.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
         val startDate = today.time
 
-        // Set end of the week (Saturday)
         val endDate = today.clone() as Calendar
         endDate.add(Calendar.DAY_OF_WEEK, 6)
         val endDateDate = endDate.time
@@ -138,7 +135,7 @@ class MainActivity : AppCompatActivity() {
                         }
                         entryDate?.let { it in startDate..endDateDate } ?: false
                     }
-                    Log.d("debug", "Entries found: $count for week: ${dateFormat.format(startDate)} - ${dateFormat.format(endDateDate)}")
+                    Log.d("debug", "Jumlah entri: $count minggu ini: ${dateFormat.format(startDate)} - ${dateFormat.format(endDateDate)}")
                     binding.tvDailyCounter.text = "$count/7"
                 } else {
                     Log.e("error", task.exception?.message.toString())
@@ -147,39 +144,43 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-
-    private fun setupListener(){
+    private fun setupListener() {
         binding.btnRecomendation.setOnClickListener {
             startActivity(Intent(this, RecommendationActivity::class.java))
         }
         binding.btnInputData.setOnClickListener {
             startActivity(Intent(this, JournalInputActivity::class.java))
         }
+        binding.btnReport.setOnClickListener {
+            val intent = Intent(this, laporan::class.java)
+            intent.putExtra("healthDataList", ArrayList(healthDataList))
+            startActivity(intent)
+        }
     }
 
     private fun dailycheck() {
         getWeekCount()
-        val today = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(android.icu.util.Calendar.getInstance().time).toString()
+        val today = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Calendar.getInstance().time)
         val userID = user.currentUser!!.uid
         database.getReference("users").child(userID).child("journal").get().addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    task.result.children.forEach {
-                        if (it.child("date").value.toString() == today) {
-                            dailyReport = true
-                            switchLayout()
-                            val referencePath = it.key ?: return@forEach
-                            populateTodayReport(referencePath)
-                        }
+            if (task.isSuccessful) {
+                task.result.children.forEach {
+                    if (it.child("date").value.toString() == today) {
+                        dailyReport = true
+                        switchLayout()
+                        val referencePath = it.key ?: return@forEach
+                        populateTodayReport(referencePath)
                     }
-                } else {
-                    Log.d("error", task.exception!!.message.toString())
-                    Toast.makeText(this, task.exception!!.message, Toast.LENGTH_SHORT).show()
                 }
+            } else {
+                Log.d("error", task.exception!!.message.toString())
+                Toast.makeText(this, task.exception!!.message, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private fun switchLayout(){
-        if (binding.clDailyReport1.visibility == View.VISIBLE){
+    private fun switchLayout() {
+        if (binding.clDailyReport1.visibility == View.VISIBLE) {
             binding.clDailyReport1.visibility = View.INVISIBLE
             binding.clDailyReport2.visibility = View.VISIBLE
             binding.btnRecomendation.visibility = View.VISIBLE
@@ -206,17 +207,17 @@ class MainActivity : AppCompatActivity() {
             userRef.get().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     if (task.result.exists() && task.result.childrenCount > 0) {
-                        Toast.makeText(this, "Selamat Kembali!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Selamat datang kembali!", Toast.LENGTH_SHORT).show()
                         dailycheck()
                         getWeekCount()
                         populateHistory()
                     } else {
-                        Toast.makeText(this, "Tidak ada user data kesehatan. Tolong isi data kesehatan profile.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Data kesehatan belum tersedia. Silakan isi profil terlebih dahulu.", Toast.LENGTH_LONG).show()
                         startActivity(Intent(this@MainActivity, UsersInputActivity::class.java))
                         finish()
                     }
                 } else {
-                    Toast.makeText(this, "Failed to retrieve user data.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Gagal mengambil data pengguna.", Toast.LENGTH_SHORT).show()
                 }
             }
         } else {
@@ -244,7 +245,7 @@ class MainActivity : AppCompatActivity() {
                     val bloodSugar = data.child("bloodSugar").value.toString().toFloatOrNull() ?: 0f
                     val diastolicBP = data.child("bloodPressureDIA").value.toString().toIntOrNull() ?: 0
                     val systolicBP = data.child("bloodPressureSYS").value.toString().toIntOrNull() ?: 0
-                    val BMI = data.child("bmi").value.toString().toFloatOrNull() ?: 0f
+                    val BMI = data.child("BMI").value.toString().toFloatOrNull() ?: 0f
                     val date = data.child("date").value.toString()
                     val task = data.child("recommendation").child("tasks").value as? List<Map<String, Any>> ?: emptyList()
 
@@ -265,10 +266,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
     private fun populateTodayReport(referencePath: String) {
         if (!::user.isInitialized || user.currentUser == null) {
-            Log.e("MainActivity", "User not logged in, cannot fetch today's report")
+            Log.e("MainActivity", "Pengguna belum login, tidak bisa ambil laporan hari ini.")
             return
         }
 
@@ -284,7 +284,7 @@ class MainActivity : AppCompatActivity() {
                     binding.tvBmiLevel.text = String.format(Locale.getDefault(), "%.2f BMI", bmiValue)
                     binding.tvBmiDesc.text = it.result.child("recommendation").child("BMIAnalysis").value.toString()
                 } else {
-                    Log.e("MainActivity", "Error fetching today's report: ${it.exception?.message}")
+                    Log.e("MainActivity", "Gagal mengambil laporan hari ini: ${it.exception?.message}")
                     Toast.makeText(this, it.exception?.message, Toast.LENGTH_SHORT).show()
                 }
             }

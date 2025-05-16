@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_profile"
     android:layout_margin="10dp"
     android:padding="5dp"
@@ -13,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="280dp"
-        android:text="Friday"
+        android:text="Jumat"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,13 +49,14 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_date"
-        app:layout_constraintVertical_bias="0.647" />
+        app:layout_constraintVertical_bias="0.388" />
 
     <TextView
         android:id="@+id/tv_sub_BSL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Blood Sugar Level : "
+        android:textColor="@color/black"
+        android:text="Kadar Gula Darah : "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.176"
@@ -81,13 +82,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="88dp"
-        android:text="Blood Pressure Level :"
+        android:text="Kadar Tekanan Darah :"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.604"
-        app:layout_constraintStart_toEndOf="@+id/iv_user"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_sub_BSL"
         app:layout_constraintTop_toBottomOf="@+id/tv_sub_BSL"
-        app:layout_constraintVertical_bias="0.042" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tv_BP_Level"
@@ -107,18 +109,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
-        android:text="Recommended goals completed"
+        android:text="Target yang Disarankan Tercapai"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toEndOf="@+id/iv_user"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_sub_BPL"
         app:layout_constraintTop_toBottomOf="@+id/tv_sub_BPL"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.071" />
 
     <TextView
         android:id="@+id/tv_goals_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:text="[lorem ipsum]"
         app:layout_constraintEnd_toEndOf="@+id/tv_sub_goals"
         app:layout_constraintStart_toStartOf="@+id/tv_sub_goals"

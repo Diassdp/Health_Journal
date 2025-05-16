@@ -5,14 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Secondary_Light"
+    android:background="@color/background"
     tools:context=".ui.journal.detail.DetailJournalActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="@color/Accent_Dark_Gray"
+        android:background="@drawable/bg_dashboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="JOURNAL DETAIL"
+            android:text="DETAIL JURNAL"
             android:textAlignment="center"
             android:textColor="@color/Primary_Dark"
             android:textSize="20sp"
@@ -35,11 +35,11 @@
             android:id="@+id/tv_bloodsugar_level1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Blood Sugar Level :"
+            android:layout_marginTop="8dp"
+            android:text="Tingkat Gula Darah :"
             android:textColor="@color/Primary_Dark"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.375"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,29 +60,29 @@
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             tools:text="100 mg/dL" />
 
-
         <TextView
             android:id="@+id/tv_bloodsugar_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="10sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/tv_bloodsugar_level2"
             app:layout_constraintStart_toStartOf="@+id/tv_bloodsugar_level1"
             app:layout_constraintTop_toBottomOf="@id/tv_bloodsugar_level1"
-            tools:text="Your blood sugar level is within the normal range. Maintain a balanced diet and regular exercise." />
+            tools:text="olahraga teratur." />
 
         <TextView
             android:id="@+id/tv_bloodpressure_level1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Blood Pressure Level :"
+            android:layout_marginTop="8dp"
+            android:text="Tingkat Tekanan Darah :"
             android:textColor="@color/Primary_Dark"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.408"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_bloodsugar_level1"
             app:layout_constraintTop_toBottomOf="@id/tv_bloodsugar_desc" />
 
         <TextView
@@ -100,29 +100,29 @@
             app:layout_constraintTop_toBottomOf="@id/tv_bloodsugar_desc"
             tools:text="119/70 mm Hg" />
 
-
         <TextView
             android:id="@+id/tv_bloodpressure_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="10sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/tv_bloodpressure_level2"
             app:layout_constraintStart_toStartOf="@+id/tv_bloodpressure_level1"
             app:layout_constraintTop_toBottomOf="@id/tv_bloodpressure_level1"
-            tools:text="Your blood sugar level is within the normal range. Maintain a balanced diet and regular exercise." />
+            tools:text="Tingkat tekanan darah Anda berada dalam kisaran normal. Pertahankan pola makan seimbang dan olahraga teratur." />
 
         <TextView
             android:id="@+id/tv_BMI_level1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BMI(Body Mass Index) :"
+            android:layout_marginTop="8dp"
+            android:text="BMI (Indeks Massa Tubuh) :"
             android:textColor="@color/Primary_Dark"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.426"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_bloodpressure_level1"
             app:layout_constraintTop_toBottomOf="@id/tv_bloodpressure_desc" />
 
         <TextView
@@ -141,23 +141,23 @@
             app:layout_constraintTop_toBottomOf="@id/tv_bloodpressure_desc"
             tools:text="22.03 BMI" />
 
-
         <TextView
             android:id="@+id/tv_BMI_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="10sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/tv_BMI_level2"
             app:layout_constraintStart_toStartOf="@+id/tv_BMI_level1"
             app:layout_constraintTop_toBottomOf="@id/tv_BMI_level1"
-            tools:text="This is still considered an acceptable range, and is associated with good health." />
+            tools:text="Ini masih dianggap kisaran yang dapat diterima, dan berhubungan dengan kesehatan yang baik." />
 
         <TextView
             android:id="@+id/tv_goals1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Goals Completed :"
+            android:text="Tugas yang Dicapai :"
             android:textColor="@color/Primary_Dark"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -187,7 +187,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="JOURNAL NOTES"
+        android:text="CATATAN JURNAL"
         android:textAlignment="center"
         android:textColor="@color/Primary_Dark"
         android:textSize="20sp"
@@ -205,6 +205,7 @@
         android:layout_marginTop="5dp"
         android:padding="10dp"
         android:textSize="11sp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_note"
@@ -217,7 +218,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/bg_button"
-        android:text="Delete History"
+        android:text="Hapus Riwayat"
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="14sp"
@@ -227,4 +228,3 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_journal_note" />
 </androidx.constraintlayout.widget.ConstraintLayout>
-

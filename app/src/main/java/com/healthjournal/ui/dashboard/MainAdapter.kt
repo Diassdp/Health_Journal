@@ -1,7 +1,6 @@
 package com.healthjournal.ui.dashboard
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,80 +10,73 @@ import com.healthjournal.R
 import com.healthjournal.data.ResultData
 import com.healthjournal.ui.journal.detail.DetailJournalActivity
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 
-class MainAdapter(private val healthDataList: MutableList<ResultData>) : RecyclerView.Adapter<MainAdapter.HealthViewHolder>() {
+class MainAdapter(private val daftarDataKesehatan: MutableList<ResultData>) : RecyclerView.Adapter<MainAdapter.HolderDataKesehatan>() {
 
-    class HealthViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvDay: TextView = view.findViewById(R.id.tv_day)
-        val tvDate: TextView = view.findViewById(R.id.tv_date)
-        val tvBloodSugar: TextView = view.findViewById(R.id.tv_BS_Level)
-        val tvBloodPressure: TextView = view.findViewById(R.id.tv_BP_Level)
-        val tvGoals: TextView = view.findViewById(R.id.tv_goals_count)
+    class HolderDataKesehatan(view: View) : RecyclerView.ViewHolder(view) {
+        val tvHari: TextView = view.findViewById(R.id.tv_day)
+        val tvTanggal: TextView = view.findViewById(R.id.tv_date)
+        val tvGulaDarah: TextView = view.findViewById(R.id.tv_BS_Level)
+        val tvTekananDarah: TextView = view.findViewById(R.id.tv_BP_Level)
+        val tvTugas: TextView = view.findViewById(R.id.tv_goals_count)
     }
 
-    // Function to update the list and notify the adapter
-    fun setData(newData: List<ResultData>) {
-        healthDataList.clear()
-        healthDataList.addAll(newData)
+    fun perbaruiData(dataBaru: List<ResultData>) {
+        daftarDataKesehatan.clear()
+        daftarDataKesehatan.addAll(dataBaru)
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HealthViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_health_history, parent, false)
-        return HealthViewHolder(view)
-    }
-
-    private fun dayOfWeek(date: String): String {
+    private fun dapatkanHariDariTanggal(tanggal: String): String {
         return try {
-            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            val parsedDate = dateFormat.parse(date)
-            if (parsedDate != null) {
-                SimpleDateFormat("EEEE", Locale.getDefault()).format(parsedDate)
+            val formatTanggal = SimpleDateFormat("dd/MM/yyyy", Locale("id", "ID"))
+            val tanggalTerurai = formatTanggal.parse(tanggal)
+            if (tanggalTerurai != null) {
+                SimpleDateFormat("EEEE", Locale("id", "ID")).format(tanggalTerurai)
+                    .replaceFirstChar { it.uppercaseChar() }
             } else {
-                "Invalid Date"
+                "Tanggal Tidak Valid"
             }
         } catch (e: Exception) {
-            "Invalid Date"
+            "Tanggal Tidak Valid"
         }
     }
 
-    private fun countGoals(taskList: List<Map<String, Any>>): String {
-        Log.d("debug", taskList.toString())
-        var completedGoals = 0
-        val totalGoals = taskList.size
-
-        for (task in taskList) {
-            val isCompleted = task["completed"] as? Boolean ?: false
-            if (isCompleted) {
-                completedGoals++
-            }
-        }
+    private fun hitungTugasRekomendasi(daftarTugas: List<Map<String, Any>>): String {
+        val total = daftarTugas.size
+        val selesai = daftarTugas.count { (it["completed"] as? Boolean) == true }
 
         return when {
-            totalGoals == 0 -> "No goals available"
-            completedGoals == 0 -> "No goals completed"
-            else -> "$completedGoals/$totalGoals goals completed"
+            total == 0 -> "Tidak ada tugas"
+            selesai == 0 -> "Belum ada tugas selesai"
+            else -> "$selesai dari $total tugas selesai"
         }
     }
 
-    override fun onBindViewHolder(holder: HealthViewHolder, position: Int) {
-        val healthData = healthDataList[position]
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderDataKesehatan {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_health_history, parent, false)
+        return HolderDataKesehatan(view)
+    }
 
-        holder.tvDay.text = dayOfWeek(healthData.date)
-        holder.tvDate.text = healthData.date
-        holder.tvBloodSugar.text = "${healthData.bloodSugar} mg/dL"
-        holder.tvBloodPressure.text = "${healthData.diastolicBP}/${healthData.systolicBP} mm Hg"
-        holder.tvGoals.text = countGoals(healthData.task)
+    override fun onBindViewHolder(holder: HolderDataKesehatan, posisi: Int) {
+        val data = daftarDataKesehatan[posisi]
+
+        holder.tvHari.text = dapatkanHariDariTanggal(data.date)
+        holder.tvTanggal.text = data.date
+        holder.tvGulaDarah.text = "${data.bloodSugar} mg/dL"
+        holder.tvTekananDarah.text = "${data.systolicBP}/${data.diastolicBP} mmHg"
+        holder.tvTugas.text = hitungTugasRekomendasi(data.task)
+
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
             val intent = Intent(context, DetailJournalActivity::class.java).apply {
-                putExtra("JOURNAL_KEY", healthData.journalID)
+                putExtra("JOURNAL_KEY", data.journalID)
             }
             context.startActivity(intent)
         }
     }
 
-    override fun getItemCount(): Int = healthDataList.size
+    override fun getItemCount(): Int = daftarDataKesehatan.size
 }

@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Tolong Masukan Laporan Hari Ini"
+            android:text="Silakan Masukkan Laporan Hari Ini"
             android:textStyle="bold"
             android:textColor="@color/Primary_Dark"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Blood Pressure\n(SYS) (mm/HG)"
+                android:text="Tekanan Darah\n(Sistolik) \n(mm/Hg)"
                 android:textAlignment="center"
                 android:textColor="@color/Primary_Dark"
                 android:textSize="8sp"
@@ -71,7 +71,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/tv_input_blood_pressure_SYS"
                 app:layout_constraintStart_toStartOf="@+id/tv_input_blood_pressure_SYS"
                 app:layout_constraintTop_toBottomOf="@id/tv_input_blood_pressure_SYS" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Blood Pressure\n(DIA) (mm/HG)"
+                android:text="Tekanan Darah\n(Diastolik)\n(mm/Hg)"
                 android:textAlignment="center"
                 android:textColor="@color/Primary_Dark"
                 android:textSize="8sp"
@@ -114,7 +113,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/tv_input_blood_pressure_DIA"
                 app:layout_constraintStart_toStartOf="@+id/tv_input_blood_pressure_DIA"
                 app:layout_constraintTop_toBottomOf="@+id/tv_input_blood_pressure_DIA" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -129,12 +127,13 @@
             app:layout_constraintStart_toStartOf="@+id/cl_input_note"
             app:layout_constraintTop_toBottomOf="@+id/cl_input_blood_pressure_SYS"
             app:layout_constraintVertical_bias="0.05">
+
             <TextView
                 android:id="@+id/tv_input_blood_sugar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Blood Sugar \nLevel (mg/dL)"
+                android:text="Kadar Gula\nDarah (mg/dL)"
                 android:textAlignment="center"
                 android:textColor="@color/Primary_Dark"
                 android:textSize="8sp"
@@ -177,7 +176,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Weight\n(kg)"
+                android:text="Berat Badan\n(kg)"
                 android:textAlignment="center"
                 android:textColor="@color/Primary_Dark"
                 android:textSize="8sp"
@@ -203,34 +202,22 @@
 
             <EditText
                 android:id="@+id/edt_gender"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:background="@color/white"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <EditText
                 android:id="@+id/edt_age"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:background="@color/white"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <EditText
                 android:id="@+id/edt_height"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:background="@color/white"
                 android:visibility="gone"
-                android:maxLength="3"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -250,7 +237,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="NOTES"
+                android:text="Catatan"
                 android:textAlignment="center"
                 android:textColor="@color/Primary_Dark"
                 android:textSize="8sp"
@@ -284,7 +271,7 @@
             android:layout_height="39dp"
             android:layout_marginBottom="36dp"
             android:background="@drawable/bg_button"
-            android:text="Input Data"
+            android:text="Kirim Data"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="14sp"

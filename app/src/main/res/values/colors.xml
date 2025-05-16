@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background">#E8F4F8</color>
 
     <color name="Primary_Dark">#004343</color>
     <color name="Primary_Light">#006C6C</color>
@@ -9,8 +10,13 @@
     <color name="Secondary_Dark">#7ABDBD</color>
     <color name="Secondary_Light">#E8F4F8</color>
 
-    <color name="Accent_Dark_Gray">#D9D9D9</color>
+    <color name="Accent_Dark_Gray">#EFEDED</color>
 
     <color name="Accent_Light_Orange">#FF5722</color>
     <color name="Accent_Light_Red">#FF0000</color>
+
+    <color name="chart_bmi">#388E3C</color>
+    <color name="chart_sugar">#D32F2F</color>
+    <color name="chart_systolic">#1976D2</color>
+    <color name="chart_diastolic">#F57C00</color>
 </resources>

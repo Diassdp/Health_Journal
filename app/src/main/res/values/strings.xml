@@ -60,5 +60,12 @@
 
     // Activity Recommendation
 
-    // Activity S
+
+    <string-array name="filter_options">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
+
+
 </resources>
