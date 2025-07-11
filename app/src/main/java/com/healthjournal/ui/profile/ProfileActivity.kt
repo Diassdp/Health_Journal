@@ -1,5 +1,6 @@
 package com.healthjournal.ui.profile
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import com.google.firebase.database.database
 import com.healthjournal.R
 import com.healthjournal.databinding.ActivityProfileBinding
 import com.healthjournal.ui.login.LoginActivity
+import java.util.Calendar
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
@@ -36,15 +38,36 @@ class ProfileActivity : AppCompatActivity() {
         binding.btnLogout.setOnClickListener {
             logout()
         }
-
         binding.btnUpdateData.setOnClickListener {
             updateData()
         }
+        binding.edtDate.setOnClickListener {
+            datepicker()
+        }
     }
 
-    private fun logout(){
+    private fun datepicker(){
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDay ->
+                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                binding.edtDate.setText(selectedDate)
+            },
+            year, month, day
+        )
+        datePickerDialog.show()
+    }
+
+    private fun logout() {
         user.signOut()
-        startActivity(Intent(this, LoginActivity::class.java))
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
         finish()
     }
 
@@ -81,7 +104,4 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
-
-
-
 }

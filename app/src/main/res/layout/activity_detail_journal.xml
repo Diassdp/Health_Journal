@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="265dp"
         android:background="@drawable/bg_dashboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.375"
+            app:layout_constraintHorizontal_bias="0.248"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
@@ -161,25 +161,23 @@
             android:textColor="@color/Primary_Dark"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tv_BMI_level1"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
             app:layout_constraintTop_toBottomOf="@id/tv_BMI_desc" />
 
         <TextView
             android:id="@+id/tv_goals2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/Accent_Light_Red"
-            android:textStyle="bold"
             android:layout_marginLeft="2dp"
+            android:textColor="@color/Accent_Light_Red"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_goals1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/tv_goals1"
-            app:layout_constraintTop_toTopOf="@+id/tv_goals1"
-            tools:text="3" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_goals1"
+            app:layout_constraintStart_toStartOf="@+id/tv_goals1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_goals1"
+            tools:text="Goals Completed" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView

@@ -11,19 +11,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.database
 import com.healthjournal.R
 import com.healthjournal.data.ResultData
 import com.healthjournal.databinding.ActivityMainBinding
 import com.healthjournal.receiver.ReminderReceiver
 import com.healthjournal.ui.journal.input.JournalInputActivity
-import com.healthjournal.ui.laporan
+import com.healthjournal.ui.laporan.laporan
 import com.healthjournal.ui.login.LoginActivity
 import com.healthjournal.ui.profile.ProfileActivity
 import com.healthjournal.ui.recommendation.RecommendationActivity
@@ -148,9 +146,15 @@ class MainActivity : AppCompatActivity() {
         binding.btnRecomendation.setOnClickListener {
             startActivity(Intent(this, RecommendationActivity::class.java))
         }
+
         binding.btnInputData.setOnClickListener {
-            startActivity(Intent(this, JournalInputActivity::class.java))
+            if (dailyReport) {
+                Toast.makeText(this, "Laporan harian sudah dibuat", Toast.LENGTH_SHORT).show()
+            } else {
+                startActivity(Intent(this, JournalInputActivity::class.java))
+            }
         }
+
         binding.btnReport.setOnClickListener {
             val intent = Intent(this, laporan::class.java)
             intent.putExtra("healthDataList", ArrayList(healthDataList))
@@ -184,6 +188,7 @@ class MainActivity : AppCompatActivity() {
             binding.clDailyReport1.visibility = View.INVISIBLE
             binding.clDailyReport2.visibility = View.VISIBLE
             binding.btnRecomendation.visibility = View.VISIBLE
+            binding.btnInputData.visibility = View.GONE
             binding.ivCuboidIndicator1Green.visibility = View.VISIBLE
             binding.ivCuboidIndicator2Green.visibility = View.VISIBLE
             binding.ivCuboidIndicator1Orange.visibility = View.INVISIBLE
@@ -192,6 +197,7 @@ class MainActivity : AppCompatActivity() {
             binding.clDailyReport1.visibility = View.VISIBLE
             binding.clDailyReport2.visibility = View.INVISIBLE
             binding.btnRecomendation.visibility = View.GONE
+            binding.btnInputData.visibility = View.VISIBLE
             binding.ivCuboidIndicator1Green.visibility = View.INVISIBLE
             binding.ivCuboidIndicator2Green.visibility = View.INVISIBLE
             binding.ivCuboidIndicator1Orange.visibility = View.VISIBLE

@@ -240,7 +240,7 @@ z
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:text="Blood Sugar Level : "
+                android:text="Tingkat Gula Darah : "
                 android:textColor="@color/Primary_Light"
                 app:layout_constraintStart_toStartOf="@+id/tv_sub_title_2"
                 app:layout_constraintTop_toBottomOf="@+id/tv_sub_title_2" />
@@ -276,7 +276,7 @@ z
                 android:layout_height="wrap_content"
                 android:textColor="@color/Primary_Light"
                 android:layout_marginTop="10dp"
-                android:text="Blood Pressure Level : "
+                android:text="Tingkat Tekanan Darah : "
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/tv_sub_title_2"
@@ -312,7 +312,7 @@ z
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:textColor="@color/Primary_Light"
-                android:text="BMI(Body Mass Index) : "
+                android:text="BMI(Inkes Massa Tubuh) : "
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/tv_sub_title_2"
@@ -470,18 +470,18 @@ z
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_button"
-            android:visibility="gone"
             android:text="Rekomendasi Sekarang"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="14sp"
+            android:visibility="gone"
             app:backgroundTint="@color/Primary_Light"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/fl_daily_counter"
+            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintStart_toStartOf="@+id/fl_daily_counter"
             app:layout_constraintTop_toBottomOf="@+id/fl_daily_counter"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_report"
@@ -502,14 +502,12 @@ z
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_health_history"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@+id/cl_Health_Report"
-        app:layout_constraintVertical_bias="0.0"
-        tools:itemCount="1"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:itemCount="2"
         tools:listitem="@layout/item_health_history" />
 
     <ImageView

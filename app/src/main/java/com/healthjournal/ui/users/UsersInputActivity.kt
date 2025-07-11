@@ -26,7 +26,6 @@ class UsersInputActivity : AppCompatActivity() {
         user = FirebaseAuth.getInstance()
         val gender = arrayOf("Male", "Female", "Other")
 
-        // Adapter for conditions
         val conditionAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, gender)
         binding.dropdownGender.setAdapter(conditionAdapter)
 

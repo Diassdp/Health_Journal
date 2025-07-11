@@ -1,10 +1,9 @@
-package com.healthjournal.ui
+package com.healthjournal.ui.laporan
 
 import MyMarkerView
 import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.charts.LineChart
@@ -16,7 +15,6 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.listener.ChartTouchListener
 import com.github.mikephil.charting.listener.OnChartGestureListener
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.healthjournal.R
 import com.healthjournal.data.ResultData
 import com.healthjournal.ui.journal.detail.DetailJournalActivity

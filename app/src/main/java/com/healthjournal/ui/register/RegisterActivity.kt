@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.healthjournal.databinding.ActivityRegisterBinding
+import com.healthjournal.ui.login.LoginActivity
 import com.healthjournal.ui.users.UsersInputActivity
 
 class RegisterActivity : AppCompatActivity() {
@@ -26,7 +27,8 @@ class RegisterActivity : AppCompatActivity() {
             registerUser()
         }
         binding.btnLogin.setOnClickListener{
-
+            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+            finish()
         }
     }
 
